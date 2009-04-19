@@ -9,6 +9,8 @@
 		function genIcon()
 		{
 			$('#icon').attr('src', '');
+			$('#icon').hide();
+			$('#icon').load(function() { $('#icon').show(); });
 			$('#icon').attr('src', '/gen_icon?month=' + encodeURIComponent($('#month').val()) + '&day=' + encodeURIComponent($('#day').val()) + '&desc=' + encodeURIComponent($('#desc').val()));
 		}
 		</script>
