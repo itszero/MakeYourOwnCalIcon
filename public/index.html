@@ -11,9 +11,43 @@
 			$('#icon').attr('src', '');
 			$('#icon').hide();
 			$('#icon').load(function() { $('#icon').show(); });
-			$('#icon').attr('src', '/gen_icon?month=' + encodeURIComponent($('#month').val()) + '&day=' + encodeURIComponent($('#day').val()) + '&desc=' + encodeURIComponent($('#desc').val()));
+			$('#icon').attr('src', '/gen_icon?month=' + encodeURIComponent($('#month').val()) + '&day=' + encodeURIComponent($('#day').val()) + '&desc=' + encodeURIComponent($('#desc').val()) + '&hue=' + encodeURIComponent($('#hue').val()) + '&sat=' + encodeURIComponent($('sat').val()));
 		}
-		</script>
+
+		function showHueSat()
+		{
+			$('#huesat').slideDown();
+		}
+	        </script>
+<script type="text/javascript" charset="utf-8">
+var keybuffer = "";
+document.onkeypress = function(e) {
+        var target;
+        if (window.event)
+            target = window.event.srcElement;
+        else
+            target = e.target;
+            
+        if (target.tagName.toUpperCase() == "INPUT") return;
+        
+        var keyToMatch = "uuddlrlrba";
+        if (window.event) // IE
+            keybuffer += String.fromCharCode(window.event.keyCode);
+        else
+            keybuffer += String.fromCharCode(e.charCode);
+
+        if (keyToMatch.indexOf(keybuffer) != 0)
+                keybuffer = "";
+        
+        if (keyToMatch == keybuffer)
+        {      
+		showHueSat(); 
+                keybuffer = "";
+        }       
+       
+        return true;
+}
+</script>
 		<style type="text/css">
 			body {
 				margin: 0;
@@ -61,6 +95,17 @@
 
 				<div class="field" style="padding-top: 10px">
 					<span style="font-size: 3em;"><a href="#" onclick="genIcon(); return false;">產生</a></span>
+				</div>
+			</div>
+
+			<div class="fieldset" id="huesat" style="display: none;">
+				<div class="field">
+					色度HUE (0~1.0)
+					<input type="text" id="hue" placeholder="1.0">
+				</div>
+				<div class="field">
+					飽和度Sat (0~1.0)
+					<input type="text" id="sat" placeholder="1.0">
 				</div>
 			</div>
 
