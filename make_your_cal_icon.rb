@@ -3,6 +3,9 @@ require 'rubygems'
 require 'sinatra'
 require 'RMagick'
 include Magick
+require 'pathname'
+
+FONTPATH = Pathname.new($0).realpath.to_s
 
 get '/' do
   open('public/index.html').read
@@ -34,7 +37,7 @@ get '/gen_icon' do
   top_text.annotate(canvasTopText, 0, 0, 0, 80, params[:month] || "FEB") {
     self.pointsize = 100
     self.font_weight = BoldWeight
-    self.font = "/home/zero/MakeYourCalIcon/Aller/Aller_Bd.ttf"
+    self.font = FONTPATH 
     self.fill = 'white'
   }
   gradTopText = GradientFill.new(0, 0, 300, 0, "#FFFFFF", "#C0C0C0")
@@ -50,7 +53,7 @@ get '/gen_icon' do
   day_text.annotate(canvasDay, 0, 0, 0, 270, params[:day] || "29") {
     self.pointsize = 220
     self.font_weight = BoldWeight
-    self.font = "/home/zero/MakeYourCalIcon/Aller/Aller_Bd.ttf"
+    self.font = FONTPATH
     self.fill = 'white'
   }
   gradTopText = GradientFill.new(0, 0, 300, 0, "#AAAAAA", "#000000")
@@ -66,7 +69,7 @@ get '/gen_icon' do
   desc_text.annotate(canvasDesc, 0, 0, 0, 30, params[:desc] || "Server Error") {
     self.pointsize = 40
     self.font_weight = BoldWeight
-    self.font = "/home/zero/MakeYourCalIcon/Aller/Aller_Bd.ttf"
+    self.font = FONTPATH
     self.fill = '#ACACAC'
   }
   canvasDesc.trim!
