@@ -3,9 +3,8 @@ require 'rubygems'
 require 'sinatra'
 require 'RMagick'
 include Magick
-require 'pathname'
 
-FONTPATH = Pathname.new($0).realpath.to_s
+FONTPATH = File.dirname(File.expand_path(__FILE__)) + "/Aller/Aller_Bd.ttf"
 
 get '/' do
   open('public/index.html').read
